@@ -63,3 +63,13 @@ resource "aws_instance" "instance" {
     Name = each.value["name"]
   }
 }
+
+resource "aws_route53_record" "records" {
+  for_each = var.component
+  zone_id = "Z07551482ORWS1T3ML489"
+  name    = "${each.value["name"]}-dev.devops71.cloud"
+  type    = "A"
+  ttl     = 5
+  records = [aws_instance.instance[each.value["name"]].private_ip]
+
+}
