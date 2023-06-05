@@ -22,7 +22,7 @@ provisioner "remote-exec" {
     "rm -rf roboshop-shell",
     "https://github.com/SandeepNainala/roboshop-shell.git",
     "cd roboshop-shell",
-    "bash ${each.value["name"]}.sh"
+    "bash ${each.value["name"]}.sh
   ]
 }
 
