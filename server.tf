@@ -1,37 +1,87 @@
-
-resource "aws_instance" "instance" {
-  for_each = var.components
-  ami           = data.aws_ami.centos.image_id
-  instance_type = each.value["instance_type"]
-  vpc_security_group_ids = [data.aws_security_group.allow-all.id]
+resource "aws_instance" "fronend" {
+  ami           = "ami-03265a0778a880afb"
+  instance_type = "t2.micro"
 
   tags = {
-    Name = each.value["name"]
+    Name = "frontend"
   }
 }
 
-provisioner "remote-exec" {
+resource "aws_instance" "mongodb" {
+  ami           = "ami-03265a0778a880afb"
+  instance_type = "t2.micro"
 
-  connection {
-    type     = "ssh"
-    user     = "centos"
-    password = "DevOps321"
-    host     = self.private_ip
+  tags = {
+    Name = "mongodb"
   }
-  inline = [
-    "rm -rf roboshop-shell",
-    "https://github.com/SandeepNainala/roboshop-shell.git",
-    "cd roboshop-shell",
-    "bash ${each.value["name"]}.sh
-  ]
 }
 
-resource "aws_route53_record" "records" {
-  for_each = var.components
-  zone_id = "Z07551482ORWS1T3ML489"
-  name    = "${each.value["name"]}-dev.devops71.cloud"
-  type    = "A"
-  ttl     = 5
-  records = [aws_instance.instance[each.value["name"]].private_ip]
+resource "aws_instance" "catalogue" {
+  ami           = "ami-03265a0778a880afb"
+  instance_type = "t2.micro"
 
+  tags = {
+    Name = "catalogue"
+  }
+}
+
+resource "aws_instance" "redis" {
+  ami           = "ami-03265a0778a880afb"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "redis"
+  }
+}
+
+resource "aws_instance" "user" {
+  ami           = "ami-03265a0778a880afb"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "user"
+  }
+}
+
+resource "aws_instance" "cart" {
+  ami           = "ami-03265a0778a880afb"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "cart"
+  }
+}
+
+resource "aws_instance" "mysql" {
+  ami           = "ami-03265a0778a880afb"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "mysql"
+  }
+}
+resource "aws_instance" "shipping" {
+  ami           = "ami-03265a0778a880afb"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "shipping"
+  }
+}
+
+resource "aws_instance" "rabbitmq" {
+  ami           = "ami-03265a0778a880afb"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "rabbitmq"
+  }
+}
+resource "aws_instance" "payment" {
+  ami           = "ami-03265a0778a880afb"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "payment"
+  }
 }
