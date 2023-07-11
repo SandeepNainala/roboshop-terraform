@@ -1,4 +1,15 @@
-resource "aws_instance" "fronend" {
+data "aws_ami" "centos" {
+  owners             = ["973714476881"]
+  most_recent       = true
+  name_regex        = "Centos-8-DevOps-Practice"
+
+}
+
+output "ami" {
+  value = data.aws_ami.centos.image_id
+}
+
+resource "aws_instance" "frontend" {
   ami           = "ami-03265a0778a880afb"
   instance_type = "t2.micro"
 
@@ -7,6 +18,9 @@ resource "aws_instance" "fronend" {
   }
 }
 
+output "frontend" {
+  value = aws_instance.frontend.public_ip
+}
 resource "aws_instance" "mongodb" {
   ami           = "ami-03265a0778a880afb"
   instance_type = "t2.micro"
