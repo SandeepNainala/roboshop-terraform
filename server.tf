@@ -6,23 +6,67 @@ data "aws_ami" "centos" {
 data aws_security_group "allow-all"{
   name = "allow-all"
 }
-variable "instance_type" {
-  default = "t3.small"
+
+variable "component" {
+  default = {
+    frontend = {
+      name          = "frontend"
+      instance_type = "t2.small"
+    }
+    mongodb = {
+      name          = "mongodb"
+      instance_type = "t2.small"
+    }
+    catalogue = {
+      name          = "catalogue"
+      instance_type = "t2.small"
+    }
+    redis = {
+      name          = "redis"
+      instance_type = "t2.small"
+    }
+    user = {
+      name          = "user"
+      instance_type = "t2.small"
+    }
+    mysql = {
+      name          = "mysql"
+      instance_type = "t2.small"
+    }
+    cart = {
+      name          = "cart"
+      instance_type = "t2.small"
+    }
+    shipping = {
+      name          = "shipping"
+      instance_type = "t2.small"
+    }
+    rabbitmq = {
+      name          = "rabbitmq"
+      instance_type = "t2.small"
+    }
+  }
 }
+
 
 output "ami" {
   value = data.aws_ami.centos.image_id
 }
+variable "components" {
+  default = ["frontend" , "mongdb", "cart"]
+}
 
-resource "aws_instance" "frontend" {
+resource "aws_instance" "instance" {
+  count                  = length(var.components)
   ami                    = "ami-03265a0778a880afb"
   instance_type          =  var.instance_type
   vpc_security_group_ids = [data.aws_security_group.allow-all.id]
 
   tags = {
-    Name = "frontend"
+    Name = var.components[count.index]
   }
 }
+/*
 output "frontend" {
   value = aws_instance.frontend.public_ip
 }
@@ -171,4 +215,4 @@ resource "aws_route53_record" "payment" {
   type    = "A"
   ttl     = 30
   records = [aws_instance.frontend.private_ip]
-}
+}*/
