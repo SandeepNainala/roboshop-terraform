@@ -7,7 +7,7 @@ data aws_security_group "allow-all"{
   name = "allow-all"
 }
 
-variable "component" {
+variable "components" {
   default = {
     frontend = {
       name          = "frontend"
@@ -52,9 +52,6 @@ variable "component" {
 output "ami" {
   value = data.aws_ami.centos.image_id
 }
-variable "components" {
-  default = ["frontend" , "mongdb", "cart"]
-}
 
 resource "aws_instance" "instance" {
   for_each               = var.components
@@ -66,18 +63,17 @@ resource "aws_instance" "instance" {
     Name = each.value["name"]
   }
 }
-/*
-output "frontend" {
-  value = aws_instance.frontend.public_ip
-}
 
-resource "aws_route53_record" "frontend" {
-  zone_id = "Z042461937PGA0ROGA0L"
-  name    = "frontend-dev.devops71.cloud"
-  type    = "A"
-  ttl     = 30
-  records = [aws_instance.frontend.private_ip]
+
+resource "aws_route53_record" "records" {
+  for_each  = var.components
+  zone_id   = "Z042461937PGA0ROGA0L"
+  name      = "${each.value["name"]}-dev.devops71.cloud"
+  type      = "A"
+  ttl       = 30
+  records   = [aws_instance.instance[each.value["name"]].private_ip]
 }
+/*
 resource "aws_instance" "mongodb" {
   ami           = "ami-03265a0778a880afb"
   instance_type =  var.instance_type
@@ -215,4 +211,5 @@ resource "aws_route53_record" "payment" {
   type    = "A"
   ttl     = 30
   records = [aws_instance.frontend.private_ip]
-}*/
+}*//*
+
