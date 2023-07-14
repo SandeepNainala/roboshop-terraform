@@ -1,7 +1,4 @@
-variable "components" {
-}
+variable "components" {}
 
-variable "dev" {
-}
-variable "prod" {
-}
+variable "dev" {}
+variable "prod" {}
