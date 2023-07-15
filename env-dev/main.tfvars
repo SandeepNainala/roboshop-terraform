@@ -9,7 +9,7 @@ components = {
   }
   catalogue = {
     name          = "catalogue"
-    instance_type = "t2.micro"
+    instance_type = "t3.medium"
   }
   redis = {
     name          = "redis"
@@ -31,6 +31,7 @@ components = {
   shipping = {
     name          = "shipping"
     instance_type = "t2.small"
+    password      = "RoboShop@1"
   }
   rabbitmq = {
     name          = "rabbitmq"
