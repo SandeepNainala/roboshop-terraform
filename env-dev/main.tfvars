@@ -26,7 +26,7 @@ components = {
   }
   cart = {
     name          = "cart"
-    instance_type = "t2.small"
+    instance_type = "t2.medium"
   }
   shipping = {
     name          = "shipping"
