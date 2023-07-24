@@ -7,3 +7,4 @@ variable "provisioner" {
 }
 
 variable "app_type" {}
+variable "database_type" {}
