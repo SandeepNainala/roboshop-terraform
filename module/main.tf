@@ -84,9 +84,7 @@ resource "aws_iam_role_policy" "ssm-ps-policy" {
             "arn:aws:ssm:us-east-1:673904956414:parameter/${var.env}.${var.component_name}.*"
           ]
         }
-      ]
-    }
-      ]
+      ],
     }
   )
 }
