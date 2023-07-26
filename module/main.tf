@@ -6,7 +6,7 @@ resource "aws_instance" "instance" {
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
 
   tags = {
-    Name = "${var.component_name[count.index]}-${count.index}"
+    Name = aws_instance.instance.id
   }
 }
 
@@ -32,8 +32,8 @@ resource "aws_route53_record" "records" {
   name      = "${var.component_name}-dev.devops71.cloud"
   type      = "A"
   ttl       = 30
-  #records   = [aws_instance.instance.private_ip]
-  records = aws_instance.instance[count.index]
+  records   = [aws_instance.instance.private_ip]
+
 }
 
 resource "aws_iam_role" "role" {
