@@ -32,7 +32,8 @@ resource "aws_route53_record" "records" {
   name      = "${var.component_name}-dev.devops71.cloud"
   type      = "A"
   ttl       = 30
-  records   = [aws_instance.instance.private_ip]
+  #records   = [aws_instance.instance.private_ip]
+  records = aws_instance.instance[count.index]
 }
 
 resource "aws_iam_role" "role" {
