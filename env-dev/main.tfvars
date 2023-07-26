@@ -31,7 +31,7 @@ app_servers = {
   }
 }
 
-env = "dev"
+
 
 database_servers = {
 
@@ -54,3 +54,5 @@ database_servers = {
     instance_type = "t2.micro"
   }
 }
+
+env ="dev"
