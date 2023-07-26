@@ -11,7 +11,7 @@ module "database-servers" {
   app_type       = "db"
 }
 module "app-servers" {
-  #depends_on    = [module.database-servers]
+  depends_on    = [module.database-servers]
   for_each      = var.app_servers
   source        = "./module"
 

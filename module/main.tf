@@ -5,7 +5,7 @@ resource "aws_instance" "instance" {
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
 
   tags = {
-    Name = local.name
+    Name = "${var.component_name}-${var.env}}
   }
 }
 
