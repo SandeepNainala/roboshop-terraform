@@ -1,4 +1,5 @@
 resource "aws_instance" "instance" {
+  count = length(var.component_name)
   ami                    = "ami-03265a0778a880afb"
   instance_type          = var.instance_type
   vpc_security_group_ids = [data.aws_security_group.allow-all.id]
