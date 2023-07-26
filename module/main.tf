@@ -1,12 +1,11 @@
 resource "aws_instance" "instance" {
-  count = length(var.component_name)
-  ami                    = "ami-03265a0778a880afb"
+  ami                    = data.aws_ami.centos.image_id
   instance_type          = var.instance_type
   vpc_security_group_ids = [data.aws_security_group.allow-all.id]
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
 
   tags = {
-    Name = aws_instance.instance.id
+    Name = local.name
   }
 }
 
