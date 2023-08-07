@@ -1,4 +1,4 @@
 variable "env" {}
 variable "vpc" {}
 variable "app" {}
-variable "bastion_cidrs" {}
+variable "bastion_cidr" {}

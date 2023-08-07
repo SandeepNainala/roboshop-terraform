@@ -16,10 +16,10 @@ module "app" {
     name          = each.value["name"]
     desired_capacity = each.value["desired_capacity"]
     max_size         = each.value["max_size"]
-    min-size         = each.value["min_size"]
+    min_size         = each.value["min_size"]
 
     env = var.env
-    bastion_cidrs = var.bastion_cidrs
+    bastion_cidr = var.bastion_cidr
 
     subnet_ids     = element(lookup(lookup(lookup(lookup(module.vpc, "main", null),"subnets",null), each.value["subnet_name"], null), "subnet_cidrs", null),0 )
 
