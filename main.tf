@@ -9,7 +9,7 @@ module  "vpc" {
 }
 
 module "web" {
-    source = "https://github.com/SandeepNainala/tf-module-app.git"
+    source = "git::https://github.com/SandeepNainala/tf-module-app.git"
 
     for_each = var.app
     instance_type = each.value["instance_type"]
