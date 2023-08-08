@@ -33,6 +33,37 @@ module "app" {
 
 }
 
+#variable "tags" {}
+#variable "env" {}
+#variable "subnets" {}
+#variable "name" {
+#    default = "docdb"
+#}
+#variable "vpc_id" {}
+#variable "allow_db_cidr" {}
+#variable "engine_version" {}
+#variable "kms_arn" {}
+#variable "port_no" {
+#    default = "27017"
+#}
+
+
+module  "docdb" {
+    source = "git::https://github.com/SandeepNainala/tf-module-docdb.git"
+
+    for_each   = var.docdb
+
+    subnets    = (lookup(lookup(lookup(lookup(module.vpc, "main", null),"subnets",null), each.value["subnet_name"], null), "subnet_ids", null))
+    tags       = local.tags
+    env        = var.env
+
+    vpc_id = local.vpc_id
+    allow_app_cidr = (lookup(lookup(lookup(lookup(module.vpc, "main", null),"subnets",null), each.value["allow_db_cidr"], null), "subnet_cidrs", null))
+    kms_arn  = var.kms_arn
+
+}
+
+
 
 
 
