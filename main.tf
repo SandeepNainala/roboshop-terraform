@@ -48,7 +48,7 @@ module "app" {
 #}
 
 
-module  "docdb" {
+module "docdb" {
     source = "git::https://github.com/SandeepNainala/tf-module-docdb.git"
 
     for_each   = var.docdb
