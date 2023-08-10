@@ -112,3 +112,18 @@ rabbitmq = {
     instance_type = "t3.small"
   }
 }
+
+alb = {
+  public = {
+    name = "public"
+    subnets_name = "public"
+    allow_alb_cidr = null
+    internal = false
+  }
+  private = {
+    name = "private"
+    subnets_name = "private"
+    allow_alb_cidr = "web"
+    internal = true
+  }
+}
