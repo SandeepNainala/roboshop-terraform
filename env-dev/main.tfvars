@@ -115,15 +115,15 @@ rabbitmq = {
 
 alb = {
   public = {
-    name = "public"
-    subnets_name = "public"
+    name           = "public"
+    subnet_name    = "public"
     allow_alb_cidr = null
-    internal = false
+    internal       = false
   }
   private = {
-    name = "private"
-    subnets_name = "app"
+    name           = "private"
+    subnet_name    = "app"
     allow_alb_cidr = "web"
-    internal = true
+    internal       = true
   }
 }
