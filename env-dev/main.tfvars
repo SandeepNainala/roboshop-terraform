@@ -117,12 +117,12 @@ alb = {
   public = {
     name = "public"
     subnets_name = "public"
-    allow_alb_cidr = "public"
+    allow_alb_cidr = null
     internal = false
   }
   private = {
     name = "private"
-    subnets_name = "private"
+    subnets_name = "app"
     allow_alb_cidr = "web"
     internal = true
   }
