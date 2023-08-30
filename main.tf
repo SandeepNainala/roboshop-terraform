@@ -158,3 +158,10 @@ module "app" {
     monitor_cidr = var.monitor_cidr
 
 }
+
+## Load Runner
+data "aws_ami" "ami"{
+    most_recent = true
+    name_regex = "Centos-8-DevOps-Practice"
+    owners = ["973714476881"]
+}
